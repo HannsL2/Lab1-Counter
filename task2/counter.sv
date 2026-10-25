@@ -1,0 +1,19 @@
+module counter #(
+    parameter WIDTH = 8
+)(
+    // interface signal
+    input logic clk,
+    input logic rst,
+    input logic en,
+    output logic [WIDTH-1:0] count
+);
+
+always_ff @(posedge clk) begin
+    if (rst)
+        count <= {WIDTH{1'b0}};
+    else begin
+        count <= count + {{(WIDTH-1){1'b0}}, en};
+    end
+end
+
+endmodule
